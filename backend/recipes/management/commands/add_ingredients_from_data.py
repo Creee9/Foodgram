@@ -8,7 +8,8 @@ class Command(BaseCommand):
     """Команда для загрузки ингредиентов в базу данных """
 
     def import_ingredients_from_csv_file(self, *args, **kwargs):
-        with open(f'{CSV_FILES_DIR}/ingredients.csv', encoding='utf-8') as file:
+        with open(f'{CSV_FILES_DIR}/ingredients.csv',
+                  encoding='utf-8') as file:
             reader = csv.reader(file)
             next(reader)
             ingredients = [
