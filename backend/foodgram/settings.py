@@ -14,7 +14,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['84.252.136.215', '127.0.0.1', 'localhost', 'foodgram101.hopto.org']
 # ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1', '8000']
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
@@ -67,29 +66,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'foodgram.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': '/data/db.sqlite3',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'foodgram',
-#         'USER': 'postgres',
-#         'PASSWORD': 'blkv10021999',
-#         'HOST': 'localhost', # db
-#         'PORT': '5432'
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -128,7 +104,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'collected_static'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -143,8 +118,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 6,
 }
 
 DJOSER = {
