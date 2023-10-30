@@ -175,13 +175,13 @@ class CreateRecipeSerializer(ModelSerializer):
             if ingredient['id'] in list_ingredients:
                 raise serializers.ValidationError(
                     'Ингридиенты не должны повторяться'
-                    )
+                )
             list_ingredients.append(ingredient['id'])
         for tag in tags:
             if tag in list_tags:
                 raise serializers.ValidationError(
                     'Теги не должны повторяться'
-                    )
+                )
             list_tags.append(tag)
 
         return data

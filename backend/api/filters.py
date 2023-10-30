@@ -21,13 +21,13 @@ class RecipeFilter(django_filters.FilterSet):
         queryset=Tag.objects.all(),
         field_name='tags__slug',
         to_field_name='slug'
-        )
+    )
     is_favorited = NumberFilter(
         method='is_recipe_in_favorites_filter'
-        )
+    )
     is_in_shopping_cart = NumberFilter(
         method='is_recipe_in_shoppingcart_filter'
-        )
+    )
 
     def is_recipe_in_favorites_filter(self, queryset, name, value):
         if value == 1:
