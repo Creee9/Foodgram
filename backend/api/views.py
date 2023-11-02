@@ -82,10 +82,7 @@ class CustomUserViewSet(UserViewSet):
             return Response(
                 author_serializer.data, status=status.HTTP_201_CREATED
             )
-        subscription = get_object_or_404(
-            Follow, user=request.user, author=author
-        )
-        subscription.delete()
+        Follow.objects.filter(user=request.user, author=author).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -128,8 +125,6 @@ class RecipeViewSet(ModelViewSet):
         if self.action in ('list', 'retrieve'):
             return RecipeSerializer
         return CreateRecipeSerializer
-        # elif self.action in ('create', 'partial_update'):
-        # return CreateRecipeSerializer
 
     def get_serializer_context(self):
         """Метод передачи контекста"""
@@ -170,7 +165,7 @@ class RecipeViewSet(ModelViewSet):
                 {'errors': f'Рецепта \"{recipe.name}\" нет в избранном'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        return ('Без этого return pytest ругается и не дает сдать диплом(')
+        return Response
 
     @action(
         detail=True,
@@ -204,7 +199,7 @@ class RecipeViewSet(ModelViewSet):
                 {'errors': f'Рецепта \"{recipe.name}\" нет в списке покупок'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        return ('Без этого return pytest ругается и не дает сдать диплом(')
+        return Response
 
     @staticmethod
     def ingredients_to_txt(ingredients):

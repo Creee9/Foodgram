@@ -132,18 +132,6 @@ class IngredientRecipeCreateSerializer(ModelSerializer):
         return value
 
 
-# class Base64ImageField(serializers.ImageField):
-#     """Кодирования картинок base64"""
-
-#     def to_internal_value(self, data):
-#         if isinstance(data, str) and data.startswith('data:image'):
-#             format, imgstr = data.split(';base64,')
-#             ext = format.split('/')[-1]
-#             data = ContentFile(base64.b64decode(imgstr), name='photo.' + ext)
-
-#         return super().to_internal_value(data)
-
-
 class CreateRecipeSerializer(ModelSerializer):
     """Сериализатор для создания рецепта"""
 
@@ -290,7 +278,10 @@ class FollowSerializer(CustomUserSerializer):
         recipes = obj.recipes.all()
         recipes_limit = request.query_params.get('recipes_limit')
         if recipes_limit:
-            recipes = recipes[:int(recipes_limit)]
+            recipes_limit = int(recipes_limit)
+            if not isinstance(recipes_limit, int):
+                raise ValueError('recipes_limit должен быть числом')
+            recipes = recipes[:recipes_limit]
         return ForFollowRecipeSerializer(recipes, many=True).data
 
     @staticmethod
@@ -301,18 +292,9 @@ class FollowSerializer(CustomUserSerializer):
 
 
 class FavoritSerializer(serializers.ModelSerializer):
-    """Сериализатор для добавления в избранное"""
+    """Сериализатор для добавления рецептов в избранное"""
     image = Base64ImageField()
 
     class Meta:
         model = Recipe
         fields = ('id', 'name', 'image', 'cooking_time')
-
-    def validate(self, data):
-        """Метод для проверки ингридиентов и тегов"""
-
-        ingredients = self.initial_data.get('ingredients')
-        for ingredient in ingredients:
-            if not Ingredient.objects.filter(id=ingredient['id']).exists():
-                raise serializers.ValidationError('Такого ингридиента нет')
-        return data

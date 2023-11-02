@@ -10,7 +10,7 @@ CSV_FILES_DIR = os.path.join(BASE_DIR, 'data')
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['84.252.136.215', '127.0.0.1', 'localhost', 'foodgram101.hopto.org']
 # ALLOWED_HOSTS = ['*']
