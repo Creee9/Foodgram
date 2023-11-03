@@ -8,7 +8,6 @@ from rest_framework.serializers import (IntegerField, ModelSerializer,
                                         SerializerMethodField)
 from rest_framework.validators import UniqueTogetherValidator
 from users.models import CustomUser, Follow
-# from django.db import transaction
 
 # ---------------------------------------------------------------------
 #             Работа с пользователями и моделью CustomUser
@@ -183,7 +182,6 @@ class CreateRecipeSerializer(ModelSerializer):
 
         return serializer.data
 
-    # @transaction.atomic
     def create_ingredients(self, ingredients, recipe):
         """Методы для создания ингридиента"""
 
