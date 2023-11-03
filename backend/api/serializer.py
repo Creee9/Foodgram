@@ -154,12 +154,10 @@ class CreateRecipeSerializer(ModelSerializer):
         list_tags = []
 
         if not ingredients or not tags:
-            raise serializers.ValidationError('Списки ингредиентов и тегов \
-                                              не должны быть пустыми')
+            raise serializers.ValidationError(
+                'Списки ингредиентов и тегов не должны быть пустыми'
+            )
         for ingredient in ingredients:
-            if not Ingredient.objects.filter(id=ingredient['id']).exists():
-                raise serializers.ValidationError('Такого ингридиента нет')
-
             if ingredient['id'] in list_ingredients:
                 raise serializers.ValidationError(
                     'Ингридиенты не должны повторяться'
@@ -188,13 +186,14 @@ class CreateRecipeSerializer(ModelSerializer):
         """Методы для создания ингридиента"""
 
         for ingr in ingredients:
-            id = ingr['id']
-            ingredient = Ingredient.objects.get(pk=id)
-            amount = ingr['amount']
-            IngredientRecipe.objects.create(
-                recipe=recipe,
-                ingredient=ingredient,
-                amount=amount
+            IngredientRecipe.objects.bulk_create(
+                [
+                    IngredientRecipe(
+                        recipe=recipe,
+                        ingredient_id=ingr['id'],
+                        amount=ingr['amount']
+                    )
+                ]
             )
 
     def create_tags(self, tags, recipe):
@@ -278,8 +277,9 @@ class FollowSerializer(CustomUserSerializer):
         recipes = obj.recipes.all()
         recipes_limit = request.query_params.get('recipes_limit')
         if recipes_limit:
-            recipes_limit = int(recipes_limit)
-            if not isinstance(recipes_limit, int):
+            try:
+                recipes_limit = int(recipes_limit)
+            except ValueError:
                 raise ValueError('recipes_limit должен быть числом')
             recipes = recipes[:recipes_limit]
         return ForFollowRecipeSerializer(recipes, many=True).data
