@@ -1,5 +1,5 @@
 # Foodgram - продуктовый помощник
-
+https://foodgram101.hopto.org
 
 ![Python](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=56C0C0&color=008080)
 ![Django](https://img.shields.io/badge/-Django-464646?style=flat&logo=Django&logoColor=56C0C0&color=008080)
@@ -63,6 +63,8 @@ docker-compose exec backend python manage.py add_ingredients_from_data
 | 127.0.0.1/admin/     | Для входа в панель администратора |
 | 127.0.0.1/api/docs/  | Описание работы API |
 
+##Адрес сервера
+https://foodgram101.hopto.org/
 
 ## Автор:
 Беликов Тимур<br>
