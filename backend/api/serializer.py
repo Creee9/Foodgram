@@ -114,10 +114,11 @@ class IngredientRecipeCreateSerializer(ModelSerializer):
     """Сериализатор для создания ингридиентов в рецептах"""
 
     id = IntegerField()
-    amount = IntegerField()
+    amount = IntegerField(
+        error_messages={'invalid': 'Количество ингридиента должно быть числом'}
+    )
 
     class Meta:
-
         model = IngredientRecipe
         fields = ('id', 'amount')
 
@@ -129,6 +130,7 @@ class IngredientRecipeCreateSerializer(ModelSerializer):
             raise serializers.ValidationError(
                 'Количество ингредиента должно быть не меньше 1'
             )
+
         return value
 
 
@@ -146,7 +148,7 @@ class CreateRecipeSerializer(ModelSerializer):
                   'name', 'text', 'cooking_time')
 
     def validate(self, data):
-        """Метод для проверки ингридиентов и тегов"""
+        """Метод для проверки рецепта"""
 
         ingredients = self.initial_data.get('ingredients')
         tags = self.initial_data.get('tags')
