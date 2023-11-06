@@ -20,8 +20,7 @@ services:
     image: creee9/foodgram_backend
     env_file: .env
     volumes:
-      - static_volume:/backend_static   # либо ниже
-      # - static:/backend_static
+      - static_volume:/backend_static
       - media:/app/media/
     depends_on:
       - db
@@ -31,8 +30,7 @@ services:
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
-      - static_volume:/frontend_static # либо ниже
-      # - static:/frontend_static
+      - static_volume:/frontend_static
 
   gateway:
     image: creee9/foodgram_gateway
