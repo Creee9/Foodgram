@@ -1,3 +1,4 @@
+from api.validators import image_validator
 from djoser.serializers import UserCreateSerializer
 from drf_extra_fields.fields import Base64ImageField
 from recipes.models import (Favorite, Ingredient, IngredientRecipe, Recipe,
@@ -139,7 +140,7 @@ class CreateRecipeSerializer(ModelSerializer):
 
     ingredients = IngredientRecipeCreateSerializer(many=True)
     tags = PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
-    image = Base64ImageField(use_url=True)
+    image = Base64ImageField(use_url=True, validators=[image_validator])
 
     class Meta:
 
