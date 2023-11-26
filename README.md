@@ -27,7 +27,7 @@ Foodgram - приложение, где пользователи публику�
 
 Клонируйте репозиторий с проектом на свой компьютер.
 ```bash
-git clone https://github.com/creee9/foodgram-project-react.git
+git clone https://github.com/creee9/foodgram.git
 ```
 
 Выполните команду сборки docker-compose:
