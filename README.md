@@ -34,7 +34,7 @@ git clone https://github.com/Creee9/foodgram.git
 ```bash
 python -m venv venv
 source venv/Scripts/activate
-# for Mac:
+# or
 # source venv/bin/activate
 ```
 
