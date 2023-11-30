@@ -64,6 +64,15 @@ docker-compose exec backend python manage.py collectstatic
 ```bash
 docker-compose exec backend python manage.py add_ingredients_from_data
 ```
+
+- Скопируйте файлы статики в /static/static/ backend-контейнера :
+```bash
+docker compose exec backend cp -r /app/collected_static/. /backend_static/static/
+# При выполнении команды на Windows может возникнуть ошибка "The system cannot find the file specified"
+# В таком случае выполните команду "cp -r /app/collected_static/. /backend_static/static/"
+# через терменал backend-контейнера в десктоп-приложении Docker
+```
+
 - Для корректного создания рецепта, необходимо создать несколько тегов в базе через админ-панель.
 
 
